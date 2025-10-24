@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المركز البحثي - دعم البحث العلمي</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <nav>
+            <div class="logo">المركز البحثي</div>
+            <ul class="nav-links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#news">الأخبار والإعلانات</a></li>
+                <li><a href="#workshops">الورش والدورات</a></li>
+                <li><a href="#research">خدمات البحث العلمي</a></li>
+                <li><a href="#library">المكتبة الرقمية</a></li>
+                <li><a href="#expert">استشر خبيراً</a></li>
+                <li><a href="#partnerships">الشراكات والمنح</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button class="btn btn-login">تسجيل الدخول</button>
+                <button class="btn btn-register">إنشاء حساب</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>مرحباً بكم في المنصة البحثية المتكاملة</h1>
+            <p>نقدم خدمات بحثية متكاملة للباحثين والأكاديميين</p>
+            <a href="#services" class="btn btn-primary">اكتشف خدماتنا</a>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="section">
+        <h2>الأخبار والإعلانات العلمية</h2>
+        <div class="news-grid">
+            <!-- News items will be loaded dynamically -->
+        </div>
+    </section>
+
+    <!-- Workshops Section -->
+    <section id="workshops" class="section bg-light">
+        <h2>الورش والدورات التدريبية</h2>
+        <div class="workshops-container">
+            <!-- Workshop items will be loaded dynamically -->
+        </div>
+    </section>
+
+    <!-- Research Services Section -->
+    <section id="research" class="section">
+        <h2>خدمات البحث العلمي</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-book"></i>
+                <h3>كتابة المقترحات البحثية</h3>
+                <p>دورات متخصصة في كتابة مقترحات البحوث العلمية</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-search"></i>
+                <h3>إدارة المراجع البحثية</h3>
+                <p>تدريب على استخدام Mendeley وZotero</p>
+            </div>
+            <!-- More service cards -->
+        </div>
+    </section>
+
+    <!-- Digital Library Section -->
+    <section id="library" class="section bg-light">
+        <h2>المكتبة الرقمية</h2>
+        <div class="library-search">
+            <input type="text" placeholder="ابحث في المكتبة...">
+            <button class="btn">بحث</button>
+        </div>
+        <div class="library-categories">
+            <!-- Categories will be loaded dynamically -->
+        </div>
+    </section>
+
+    <!-- Ask an Expert Section -->
+    <section id="expert" class="section">
+        <h2>استشر خبيراً</h2>
+        <div class="expert-form">
+            <form id="expertForm">
+                <div class="form-group">
+                    <label for="name">الاسم</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="question">استفسارك</label>
+                    <textarea id="question" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">إرسال الاستشارة</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Partnerships Section -->
+    <section id="partnerships" class="section bg-light">
+        <h2>الشراكات والمنح البحثية</h2>
+        <div class="partnerships-grid">
+            <!-- Partnership opportunities will be loaded dynamically -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <ul>
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#about">من نحن</a></li>
+                    <li><a href="#contact">اتصل بنا</a></li>
+                    <li><a href="#privacy">سياسة الخصوصية</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>تواصل معنا</h3>
+                <p><i class="fas fa-envelope"></i> info@research-center.com</p>
+                <p><i class="fas fa-phone"></i> +966 12 345 6789</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-researchgate"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 المركز البحثي. جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
