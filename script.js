@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set initial active nav link
     setActiveNavLink();
 
-    // Mobile menu toggle (will be added when implementing responsive design)
+    // Mobile menu toggle
     const mobileMenuToggle = document.createElement('button');
     mobileMenuToggle.className = 'mobile-menu-toggle';
     mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
