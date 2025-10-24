@@ -4,22 +4,715 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>المركز البحثي - دعم البحث العلمي</title>
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --dark: #1a252f;
+            --light: #ecf0f1;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 30px rgba(0,0,0,0.15);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .btn-login {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-login:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(44, 62, 80, 0.3);
+        }
+
+        .btn-register {
+            background: var(--gradient);
+            color: white;
+            border: none;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient);
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>');
+            animation: scroll 60s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-50%, -50%); }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 1;
+            max-width: 800px;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .bg-light {
+            background: #f8f9fa;
+        }
+
+        /* News Grid */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 220px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .news-content {
+            padding: 1.5rem;
+        }
+
+        .news-date {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+
+        .news-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Workshops */
+        .workshops-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .workshop-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-right: 4px solid var(--secondary);
+        }
+
+        .workshop-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-right-color: var(--accent);
+        }
+
+        .workshop-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .workshop-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+        }
+
+        .workshop-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1rem 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .workshop-meta i {
+            color: var(--secondary);
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .service-card:hover * {
+            color: white !important;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Library Section */
+        .library-search {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            display: flex;
+            gap: 1rem;
+            background: white;
+            padding: 0.5rem;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .library-search input {
+            flex: 1;
+            border: none;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            outline: none;
+            border-radius: 50px;
+        }
+
+        .library-search button {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .library-search button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .library-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .category-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .category-item i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        /* Expert Form */
+        .expert-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        /* Partnerships */
+        .partnerships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .partnership-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .partnership-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .partnership-badge {
+            display: inline-block;
+            background: var(--gradient-2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .partnership-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .partnership-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .partnership-amount {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.3rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-section p {
+            color: #bbb;
+            margin-bottom: 0.8rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bbb;
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .section {
+                padding: 4rem 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Scroll to top button -->
+    <div class="scroll-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
     <!-- Header Section -->
-    <header>
+    <header id="header">
         <nav>
             <div class="logo">المركز البحثي</div>
             <ul class="nav-links">
                 <li><a href="#home">الرئيسية</a></li>
-                <li><a href="#news">الأخبار والإعلانات</a></li>
-                <li><a href="#workshops">الورش والدورات</a></li>
-                <li><a href="#research">خدمات البحث العلمي</a></li>
-                <li><a href="#library">المكتبة الرقمية</a></li>
+                <li><a href="#news">الأخبار</a></li>
+                <li><a href="#workshops">الورش</a></li>
+                <li><a href="#research">الخدمات</a></li>
+                <li><a href="#library">المكتبة</a></li>
                 <li><a href="#expert">استشر خبيراً</a></li>
-                <li><a href="#partnerships">الشراكات والمنح</a></li>
+                <li><a href="#partnerships">المنح</a></li>
             </ul>
             <div class="auth-buttons">
                 <button class="btn btn-login">تسجيل الدخول</button>
@@ -32,8 +725,8 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <h1>مرحباً بكم في المنصة البحثية المتكاملة</h1>
-            <p>نقدم خدمات بحثية متكاملة للباحثين والأكاديميين</p>
-            <a href="#services" class="btn btn-primary">اكتشف خدماتنا</a>
+            <p>نقدم خدمات بحثية متكاملة للباحثين والأكاديميين لتطوير مهاراتهم ودعم أبحاثهم العلمية</p>
+            <a href="#research" class="btn btn-primary">اكتشف خدماتنا</a>
         </div>
     </section>
 
@@ -41,7 +734,36 @@
     <section id="news" class="section">
         <h2>الأخبار والإعلانات العلمية</h2>
         <div class="news-grid">
-            <!-- News items will be loaded dynamically -->
+            <div class="news-card">
+                <div class="news-image">
+                    <i class="fas fa-microscope"></i>
+                </div>
+                <div class="news-content">
+                    <div class="news-date">15 أكتوبر 2025</div>
+                    <h3>إطلاق برنامج الدعم البحثي الجديد</h3>
+                    <p>تم إطلاق برنامج جديد لدعم الباحثين الشباب بميزانية تصل إلى 5 ملايين ريال لتمويل المشاريع البحثية المبتكرة.</p>
+                </div>
+            </div>
+            <div class="news-card">
+                <div class="news-image">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div class="news-content">
+                    <div class="news-date">12 أكتوبر 2025</div>
+                    <h3>فوز باحثينا بجائزة التميز العلمي</h3>
+                    <p>فاز فريق بحثي من المركز بجائزة التميز العلمي في مجال الطاقة المتجددة على مستوى المنطقة.</p>
+                </div>
+            </div>
+            <div class="news-card">
+                <div class="news-image">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div class="news-content">
+                    <div class="news-date">8 أكتوبر 2025</div>
+                    <h3>مؤتمر البحث العلمي الدولي 2025</h3>
+                    <p>ندعوكم للمشاركة في المؤتمر الدولي للبحث العلمي الذي سيعقد في ديسمبر القادم بمشاركة خبراء عالميين.</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -49,7 +771,39 @@
     <section id="workshops" class="section bg-light">
         <h2>الورش والدورات التدريبية</h2>
         <div class="workshops-container">
-            <!-- Workshop items will be loaded dynamically -->
+            <div class="workshop-card">
+                <div class="workshop-icon">
+                    <i class="fas fa-pen-fancy"></i>
+                </div>
+                <h3>كتابة الأوراق العلمية</h3>
+                <div class="workshop-meta">
+                    <span><i class="fas fa-calendar"></i> 5 نوفمبر 2025</span>
+                    <span><i class="fas fa-clock"></i> 4 ساعات</span>
+                </div>
+                <p>ورشة متخصصة في كتابة الأوراق العلمية ونشرها في المجلات المحكمة العالمية.</p>
+            </div>
+            <div class="workshop-card">
+                <div class="workshop-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>التحليل الإحصائي باستخدام SPSS</h3>
+                <div class="workshop-meta">
+                    <span><i class="fas fa-calendar"></i> 12 نوفمبر 2025</span>
+                    <span><i class="fas fa-clock"></i> 6 ساعات</span>
+                </div>
+                <p>دورة تدريبية شاملة للتحليل الإحصائي المتقدم باستخدام برنامج SPSS.</p>
+            </div>
+            <div class="workshop-card">
+                <div class="workshop-icon">
+                    <i class="fas fa-book-reader"></i>
+                </div>
+                <h3>مهارات البحث العلمي</h3>
+                <div class="workshop-meta">
+                    <span><i class="fas fa-calendar"></i> 20 نوفمبر 2025</span>
+                    <span><i class="fas fa-clock"></i> 8 ساعات</span>
+                </div>
+                <p>ورشة أساسية لتطوير مهارات البحث العلمي من البداية حتى النشر.</p>
+            </div>
         </div>
     </section>
 
@@ -60,14 +814,33 @@
             <div class="service-card">
                 <i class="fas fa-book"></i>
                 <h3>كتابة المقترحات البحثية</h3>
-                <p>دورات متخصصة في كتابة مقترحات البحوث العلمية</p>
+                <p>دورات متخصصة في كتابة مقترحات البحوث العلمية وفق المعايير الدولية</p>
             </div>
             <div class="service-card">
                 <i class="fas fa-search"></i>
                 <h3>إدارة المراجع البحثية</h3>
-                <p>تدريب على استخدام Mendeley وZotero</p>
+                <p>تدريب على استخدام Mendeley وZotero لإدارة المراجع بكفاءة</p>
             </div>
-            <!-- More service cards -->
+            <div class="service-card">
+                <i class="fas fa-laptop-code"></i>
+                <h3>التحليل الإحصائي</h3>
+                <p>خدمات التحليل الإحصائي المتقدم باستخدام أحدث البرامج</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-language"></i>
+                <h3>الترجمة العلمية</h3>
+                <p>خدمات ترجمة متخصصة للأبحاث والأوراق العلمية</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-check-circle"></i>
+                <h3>التدقيق اللغوي</h3>
+                <p>مراجعة وتدقيق الأبحاث لغوياً وعلمياً</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h3>الإشراف الأكاديمي</h3>
+                <p>دعم ومتابعة الرسائل العلمية من خبراء متخصصين</p>
+            </div>
         </div>
     </section>
 
@@ -75,72 +848,26 @@
     <section id="library" class="section bg-light">
         <h2>المكتبة الرقمية</h2>
         <div class="library-search">
-            <input type="text" placeholder="ابحث في المكتبة...">
+            <input type="text" placeholder="ابحث في المكتبة الرقمية...">
             <button class="btn">بحث</button>
         </div>
         <div class="library-categories">
-            <!-- Categories will be loaded dynamically -->
-        </div>
-    </section>
-
-    <!-- Ask an Expert Section -->
-    <section id="expert" class="section">
-        <h2>استشر خبيراً</h2>
-        <div class="expert-form">
-            <form id="expertForm">
-                <div class="form-group">
-                    <label for="name">الاسم</label>
-                    <input type="text" id="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">البريد الإلكتروني</label>
-                    <input type="email" id="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="question">استفسارك</label>
-                    <textarea id="question" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">إرسال الاستشارة</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Partnerships Section -->
-    <section id="partnerships" class="section bg-light">
-        <h2>الشراكات والمنح البحثية</h2>
-        <div class="partnerships-grid">
-            <!-- Partnership opportunities will be loaded dynamically -->
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>روابط سريعة</h3>
-                <ul>
-                    <li><a href="#home">الرئيسية</a></li>
-                    <li><a href="#about">من نحن</a></li>
-                    <li><a href="#contact">اتصل بنا</a></li>
-                    <li><a href="#privacy">سياسة الخصوصية</a></li>
-                </ul>
+            <div class="category-item">
+                <i class="fas fa-flask"></i>
+                <h4>العلوم الطبيعية</h4>
             </div>
-            <div class="footer-section">
-                <h3>تواصل معنا</h3>
-                <p><i class="fas fa-envelope"></i> info@research-center.com</p>
-                <p><i class="fas fa-phone"></i> +966 12 345 6789</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-researchgate"></i></a>
-                </div>
+            <div class="category-item">
+                <i class="fas fa-heartbeat"></i>
+                <h4>العلوم الطبية</h4>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 المركز البحثي. جميع الحقوق محفوظة</p>
-        </div>
-    </footer>
-
-    <script src="js/script.js"></script>
-</body>
-</html>
+            <div class="category-item">
+                <i class="fas fa-cogs"></i>
+                <h4>الهندسة</h4>
+            </div>
+            <div class="category-item">
+                <i class="fas fa-balance-scale"></i>
+                <h4>العلوم القانونية</h4>
+            </div>
+            <div class="category-item">
+                <i class="fas fa-users"></i>
+                <h4>العلوم الاجتماعية</h4>
